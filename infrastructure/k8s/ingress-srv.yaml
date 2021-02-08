@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-ser
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: 'true'
+spec:
+  rules:
+    - host: seatbooked.com
+      http:
+        paths:
+          - path: /api/users/?(.*)
+            backend:
+              serviceName: auth-service
+              servicePort: 3000
